@@ -15,14 +15,88 @@ datasource db {
 }
 
 model DUser {
-  userId          Int      @id @default(autoincrement()) @map("User_Id")
-  name            String   @map("Name")
-  genderTy        Int?     @map("GenderTy")
-  userImageUrl    Int?     @map("UserImage_Id")
-  lineId          String?  @map("LINE_Id")
-  isRelationLine  Boolean  @map("IsRelationLINE")
-  email           String   @unique @map("Email")
-  password        String   @map("Password")
-  createDate      DateTime @map("CreateDate")
-  updateDate      DateTime @map("UpdateDate")
+  userId          Int       @id @default(autoincrement()) @map("User_Id")
+  name            String    @map("Name")
+  genderTy        Int?      @map("GenderTy")
+  userImageUrl    Int?      @map("UserImage_Id")
+  lineId          String?   @map("LINE_Id")
+  isRelationLine  Boolean   @default(false) @map("IsRelationLINE")
+  email           String    @unique @map("Email")
+  password        String    @map("Password")
+  createDate      DateTime? @map("CreateDate")
+  updateDate      DateTime? @map("UpdateDate")
+}
+
+model DUserImage {
+  userImageId     Int       @id @default(autoincrement()) @map("UserImage_Id")
+  userId          Int       @map("User_Id")
+  imageUrl        String?   @map("ImageUrl")
+  createDate      DateTime? @map("CreateDate")
+  updateDate      DateTime? @map("UpdateDate")
+}
+
+model MGenderTy {
+  genderTy        Int       @id @map("GenderTy")
+  descr           String?   @map("Descr")
+  sortorder       Int       @default(autoincrement()) @map("SortOrder")
+  createDate      DateTime? @map("CreateDate")
+  updateDate      DateTime? @map("UpdateDate")
+}
+
+model TVote {
+  voteId           Int       @id @default(autoincrement()) @map("Vote_Id")
+  userId           Int       @map("User_Id")
+  politicalPatyTy  Int?      @map("politicalPatyTy")
+  comment          String?   @map("Comment")
+  createDate       DateTime? @map("CreateDate")
+  updateDate       DateTime? @map("UpdateDate")
+}
+
+model TVoteSupport {
+  voteId           Int       @map("Vote_Id")
+  supportUserId    Int       @map("SupportUser_Id")
+  createDate       DateTime? @map("CreateDate")
+  updateDate       DateTime? @map("UpdateDate")
+
+  @@id([voteId, supportUserId])
+}
+
+model MPoliticalPartyTy {
+  politicalPartyTy Int       @id @map("PoliticalPartyTy")
+  descr            String?   @map("Descr")
+  sortorder        Int       @default(autoincrement()) @map("SortOrder")
+  createDate       DateTime? @map("CreateDate")
+  updateDate       DateTime? @map("UpdateDate")
+}
+
+model TNews {
+  newsId          Int       @id @default(autoincrement()) @map("News_Id")
+  categoryTy      Int?      @map("CategoryTy")
+  author          String?   @map("Author")
+  title           String?   @map("Title")
+  description     String?   @map("Description")
+  url             String?   @map("Url")
+  urlToImage      String?   @map("UrlToImage")
+  publishedAt     String?   @map("PublishedAt")
+  content         String?   @map("Content")
+  createDate      DateTime? @map("CreateDate")
+  updateDate      DateTime? @map("UpdateDate") 
+}
+
+model TNewsRequest {
+  newsRequestId   Int       @id @default(autoincrement()) @map("NewsRequest_Id")
+  newsId          Int       @map("News_Id")
+  requestUrl      String?   @map("RequestUrl")
+  request         String?   @map("Request")
+  response        String?   @map("Response")
+  createDate      DateTime? @map("CreateDate")
+  updateDate      DateTime? @map("UpdateDate") 
+} 
+
+model MNewsCategoryTy {
+  newsCategoryTy   Int       @id @map("NewsCategoryTy")
+  descr            String?   @map("Descr")
+  sortorder        Int       @default(autoincrement()) @map("SortOrder")
+  createDate       DateTime? @map("CreateDate")
+  updateDate       DateTime? @map("UpdateDate")
 }
