@@ -9,14 +9,13 @@ import { useTheme } from "@mui/material/styles";
 // import { inherits } from "util";
 
 interface AppBarProps {
-  onDrawerToggle: () => void;
   onThemeToggle: () => void;
   isDarkMode: boolean;
 }
 
-export default function AppBar({onDrawerToggle, onThemeToggle, isDarkMode} : AppBarProps){
+export default function AppBar({onThemeToggle, isDarkMode} : AppBarProps){
   // const theme = useTheme();
-
+  
   return (
     <MuiAppBar 
       position="fixed" 
@@ -26,18 +25,7 @@ export default function AppBar({onDrawerToggle, onThemeToggle, isDarkMode} : App
         ml: { sm: `240px` } 
       }}
     >
-      <Toolbar>
-        {/* アイコンボタンが常に表示されるように修正 */}
-        <IconButton 
-          color="inherit" 
-          aria-label="open drawer" 
-          edge="start" 
-          onClick={onDrawerToggle} 
-          sx={{ display: { sm: 'none' } }}
-        >
-          <MenuIcon />
-        </IconButton>
-        
+      <Toolbar>        
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%'}}>
         <Typography variant="h6" noWrap component="div">
           Dashboard

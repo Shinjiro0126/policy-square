@@ -1,47 +1,66 @@
 "use client";
 
-import React, {useState} from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import AppBar from "./components/AppBar";
-import Sidebar from "./components/Sidebar";
+import React, { useState } from "react";
+import { createTheme, ThemeProvider as MuiThemeProfiver } from "@mui/material/styles";
+import { CssBaseline, Box } from "@mui/material";
+import { ThemeProvider, useThemeContext } from "./ThemeContext";
 
-
-export default function RootLayout({children} : {children: React.ReactNode}){
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+function LayoutContent({ children }: { children: React.ReactNode }) {
+  const { darkMode } = useThemeContext();
 
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
+      primary: {
+        main: '#3A833A',
+        light: '#3A833A',
+        dark: '#276227',
+        contrastText: '#FFFFFF',
+      },
+      secondary: {
+        main: '#64b5f6',
+        light: '#64b5f6',
+        dark: '#2384C7',
+        contrastText: '#000000',
+      },
     },
-  })
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  }
-   
-  const handleThemeToggle = () => {
-    setDarkMode(!darkMode);
-  }
+    components: {
+      MuiListItemButton: {
+        styleOverrides: {
+          root: ({theme}) => ({
+            '&.Mui-selected': theme.palette.mode === 'light' && {
+              backgroundColor: '#E5F4E4',
+              '& .MuiListItemIcon-root': {
+                color: '#3A833A',
+              }
+            }
+          })
+        }
+      }
+    }
 
-  return(
-    <ThemeProvider theme={theme}>
-      <html lang="ja">
-        <body>
-          <CssBaseline />
-          <Box sx={{ display: "flex" }}>
-            <AppBar onDrawerToggle={handleDrawerToggle} onThemeToggle={handleThemeToggle} isDarkMode={darkMode} />
-            <Sidebar mobileOpen={mobileOpen} onDrawerToggle={handleDrawerToggle} />
-            <Box component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - 240px)` } }}>
-              <Toolbar />
-              {children}
-            </Box>
-          </Box>
-        </body>
-      </html>
-    </ThemeProvider>
+  });
+
+  return (
+    <MuiThemeProfiver theme={theme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProfiver>
+  );
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html>
+      <body>
+        <ThemeProvider>
+          <LayoutContent>
+            {/* 子コンポーネントを表示 */}
+            {children}
+          </LayoutContent>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
