@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import React, {useState, useRef, useLayoutEffect} from "react";
 import {
   Box
 } from "@mui/material";
@@ -18,7 +18,6 @@ export function DashboardLayout({children}: {children: React.ReactNode}){
     setMobileOpen(!mobileOpen);
   };
 
-
   return(
     <Box sx={{ display: "flex" }}>
     {/* AppBar */}
@@ -30,7 +29,9 @@ export function DashboardLayout({children}: {children: React.ReactNode}){
     {/* Sidebar */}
     <Sidebar mobileOpen={mobileOpen} onDrawerToggle={handleDrawerToggle} />
     {/* メインコンテンツ */}
-    <Box component="main" sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - 240px)` } }}>
+    <Box component="main" 
+          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - 240px)` }, marginTop: '64px' }}
+      >
       {children}
     </Box>
   </Box>

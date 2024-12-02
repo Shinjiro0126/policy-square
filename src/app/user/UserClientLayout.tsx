@@ -14,8 +14,20 @@ export default function RootLayout({children} : {children: React.ReactNode}){
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
+      primary: {
+        main: '#3A833A',
+        light: '#3A833A',
+        dark: '#276227',
+        contrastText: '#FFFFFF',
+      },
+      secondary: {
+        main: '#64b5f6',
+        light: '#64b5f6',
+        dark: '#2384C7',
+        contrastText: '#000000',
+      },
     },
-  })
+  });
    
   const handleThemeToggle = () => {
     setDarkMode(!darkMode);

@@ -1,5 +1,5 @@
 import React from "react";
-import ClientLayout from "./UserClientLayout"; 
+import UserClientLayout from "./UserClientLayout"; 
 
 export const metadata = {
   title: "User Dashboard",
@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function UserLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClientLayout>
+    <UserClientLayout>
       {children} {/* クライアントレイアウト内に子コンポーネントを表示 */}
-    </ClientLayout>
+    </UserClientLayout>
   );
 }
