@@ -7,15 +7,13 @@ import {
   CssBaseline,
   Breadcrumbs,
   Link,
-  Paper,
   Card,
-  CardMedia,
-  CardActionArea,
   CardContent
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"; // アイコン名修正
 
 import { DashboardLayout } from "./DashboardLayout";
+import NewsCardList from "./components/NewsCardList"
 
 export default function LoginPage() {
 
@@ -92,39 +90,8 @@ const weeklyForecast = [
               </Box>
             </Box>
 
-            <Box>
-              <Typography variant="h4" sx={{ mb: 2 }}>
-                注目のニュース
-              </Typography>
-
-              {/* ニュースカードリスト */}
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                {dummyNews.map((news, index) => (
-                  <Card key={index} sx={{ display: "flex", height: 120 }}>
-                    <CardActionArea sx={{ display: "flex", width: "100%" }}>
-                      <CardContent sx={{ flexGrow: 1, height: '100%' }}>
-                        <Typography variant="subtitle2" sx={{
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          display: "-webkit-box",
-                          WebkitBoxOrient: "vertical",
-                          WebkitLineClamp: 3,
-                        }}
-                        >
-                          {news.title}
-                        </Typography>
-                      </CardContent>
-                      <CardMedia
-                        component="img"
-                        sx={{ width: 120 }}
-                        image={news.image}
-                        alt={news.title}
-                      />
-                    </CardActionArea>
-                  </Card>
-                ))}
-              </Box>
-            </Box>
+            {/* ニュースカードリスト */}
+            <NewsCardList newsData={dummyNews} title="注目のニュース" />
           </Box>
             
             {/* 天気予報PC */}

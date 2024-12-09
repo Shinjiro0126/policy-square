@@ -38,10 +38,14 @@ export default function AppBar({onDrawerToggle, onThemeToggle, isDarkMode} : App
           <MenuIcon />
         </IconButton>
         
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-        <Typography variant="h6" noWrap component="div">
-          Dashboard
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
+        <Box 
+          component="img"
+          src="/logo.svg"
+          alt="ロゴ"
+          sx={{height: 36}}
+        >
+        </Box>
 
           <IconButton color="inherit" onClick={onThemeToggle}>
             {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}

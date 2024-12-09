@@ -9,6 +9,23 @@ import '@fontsource/open-sans';
 import '@fontsource/open-sans/300.css';
 import '@fontsource/open-sans/400.css';
 import '@fontsource/open-sans/700.css';
+import '@fontsource/comic-neue';
+
+declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    rank: React.CSSProperties;
+  }
+
+  interface TypographyVariantsOptions {
+    rank?: React.CSSProperties;
+  }
+}
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    rank: true;
+  }
+}
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const { darkMode } = useThemeContext();
@@ -32,72 +49,27 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     },
 
     typography: {
-      fontFamily: `'Opne Sans', sans-serif`,
-      h1: {
-        fontSize: "48px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 700, // タイトル用のウェイト
-      },
-      h2: {
-        fontSize: "40px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 700, // タイトル用のウェイト
-      },
-      h3: {
-        fontSize: "32px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 700, // タイトル用のウェイト
-      },
-      h4: {
-        fontSize: "24px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 700, // タイトル用のウェイト
-      },
-      h5: {
-        fontSize: "24px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 400,
-      },
-      h6: {
-        fontSize: "20px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 400,
-      },
-      subtitle1: {
-        fontSize: "20px",
-        fontFamily: `'Open Sans', sans-serif`,
+      fontFamily: `'Open Sans', sans-serif`,
+      h1: { fontSize: "48px", lineHeight: 1.5, fontWeight: 700 },
+      h2: { fontSize: "40px", lineHeight: 1.5, fontWeight: 700 },
+      h3: { fontSize: "32px", lineHeight: 1.5, fontWeight: 700 },
+      h4: { fontSize: "24px", lineHeight: 1.5, fontWeight: 700 },
+      h5: { fontSize: "24px", lineHeight: 1.5, fontWeight: 400 },
+      h6: { fontSize: "20px", lineHeight: 1.5, fontWeight: 400 },
+      subtitle1: { fontSize: "20px", fontWeight: 700 },
+      subtitle2: { fontSize: "16px", fontWeight: 700 },
+      body1: { fontSize: "16px", fontWeight: 400 },
+      body2: { fontSize: "12px", fontWeight: 400 },
+      caption: { fontSize: "12px", fontWeight: 300 },
+      button: { fontWeight: 600, textTransform: 'none' },
+      overline: { fontSize: "12px", fontWeight: 600 },
+      rank: {
+        fontFamily: "'Comic Neue', sans-serif",
+        fontSize: "1.5rem",
         fontWeight: 700,
+        lineHeight: 1.5,
+        letterSpacing: "0.05rem",
       },
-      subtitle2: {
-        fontSize: "16px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 700,
-      },
-      body1: {
-        fontSize: "16px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 400,
-      },
-      body2: {
-        fontSize: "12px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 400,
-      },
-      caption: {
-        fontSize: "12px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 300,
-      },
-      button: {
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 600, // ボタン用
-        textTransform: 'none', // ボタンの大文字変換を無効にする
-      },
-      overline: {
-        fontSize: "12px",
-        fontFamily: `'Open Sans', sans-serif`,
-        fontWeight: 600,
-      }
     },
 
     components: {
