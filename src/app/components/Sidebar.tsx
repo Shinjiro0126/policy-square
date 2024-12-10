@@ -59,7 +59,9 @@ export default function Sidebar({ mobileOpen, onDrawerToggle }: SidebarProps) {
             <ListItem onClick={(e) => {
               if (!item.href) {
                 e.preventDefault();
-                item.children && handleClick(item.title);
+                if(item.children){
+                  handleClick(item.title)
+                }
               }
             }}>
               <Link href={item.href || "#"} passHref legacyBehavior>

@@ -8,7 +8,6 @@ import Toolbar from "@mui/material/Toolbar";
 import LoginAppBar from "../components/LoginAppBar";
 
 export default function RootLayout({children} : {children: React.ReactNode}){
-  const [mobileOpen, setMobileOpen] = React.useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
   const theme = createTheme({

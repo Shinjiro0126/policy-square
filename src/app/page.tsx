@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Typography,
   Box,
@@ -10,7 +10,6 @@ import {
   Card,
   CardContent
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined"; // アイコン名修正
 
 import { DashboardLayout } from "./DashboardLayout";
 import NewsCardList from "./components/NewsCardList"

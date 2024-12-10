@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { createTheme, ThemeProvider as MuiThemeProfiver } from "@mui/material/styles";
-import { CssBaseline, Box } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { ThemeProvider, useThemeContext } from "./ThemeContext";
 
 import '@fontsource/open-sans';

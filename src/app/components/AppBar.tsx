@@ -1,11 +1,10 @@
 "use client";
 
 import React from "react";
-import { AppBar as MuiAppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
+import { AppBar as MuiAppBar, Toolbar, IconButton, Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { useTheme } from "@mui/material/styles";
 // import { inherits } from "util";
 
 interface AppBarProps {

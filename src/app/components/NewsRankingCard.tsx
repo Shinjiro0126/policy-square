@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Typography, Card, CardActionArea, CardContent } from '@mui/material';
-import Link from 'next/link';
 
 interface NewsItem {
   id: number;
@@ -23,7 +22,6 @@ export default function NewsRankingCard({rankingData, title = "アクセスラ�
       </Typography>
       <Card>
         {rankingData.map((news, index) => (
-          // <Link key={news.id} href={news.link} passHref>
             <CardActionArea
               key={index}
               component="a" // CardActionArea を a タグとしてレンダリング
@@ -89,7 +87,6 @@ export default function NewsRankingCard({rankingData, title = "アクセスラ�
                 </Box>
               </CardContent>
             </CardActionArea>
-          // </Link>
         ))}
       </Card>
 
