@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Typography,
   Box,
@@ -12,42 +12,27 @@ import {
 } from "@mui/material";
 
 import { DashboardLayout } from "./DashboardLayout";
-import NewsCardList from "./components/NewsCardList"
+import NewsCardList from "./components/NewsCardList";
+import WeatherCard from "./components/WeatherCard";
 
 export default function LoginPage() {
+  const [news, setNews] = useState([]);
 
-  // ダミーデータ
-const dummyNews = [
-  {
-    title: "ニュース記事1",
-    summary: "これはニュース記事1の概要です。これはニュース記事1の概要です。",
-    image: "https://via.placeholder.com/120",
-  },
-  {
-    title: "ニュース記事2",
-    summary: "これはニュース記事2の概要です。",
-    image: "https://via.placeholder.com/120",
-  },
-  {
-    title: "ニュース記事3",
-    summary: "これはニュース記事3の概要です。",
-    image: "https://via.placeholder.com/120",
-  },
-  {
-    title: "ニュース記事4",
-    summary: "これはニュース記事4の概要です。",
-    image: "https://via.placeholder.com/120",
-  },
-];
-
-const weeklyForecast = [
-  { day: "火", icon: "/weather.svg", maxTemp: 28, minTemp: 19 },
-  { day: "水", icon: "/weather.svg", maxTemp: 26, minTemp: 18 },
-  { day: "木", icon: "/weather.svg", maxTemp: 25, minTemp: 17 },
-  { day: "金", icon: "/weather.svg", maxTemp: 24, minTemp: 16 },
-  { day: "土", icon: "/weather.svg", maxTemp: 23, minTemp: 15 },
-  { day: "日", icon: "/weather.svg", maxTemp: 22, minTemp: 14 },
-];
+    useEffect(() => {
+      const fetchTrendNews = async () => {
+        try {
+          const res = await fetch(`/api/news/trending`);
+          if(!res.ok){
+            throw new Error("ニュースデータの取得に失敗しました。");
+          }
+          const data = await res.json();
+          setNews(data.articles);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      fetchTrendNews();
+    }, []);
 
   return (
     <DashboardLayout>
@@ -90,74 +75,13 @@ const weeklyForecast = [
             </Box>
 
             {/* ニュースカードリスト */}
-            <NewsCardList newsData={dummyNews} title="注目のニュース" />
+            <NewsCardList newsData={news} title="注目のニュース" />
           </Box>
             
             {/* 天気予報PC */}
             <Box sx={{ width: '40%', display: {xs: 'none', md: 'block'} }}>
-              <Typography variant="h4" sx={{ mb: 2 }}>
-                本日の天気予報
-              </Typography>
-
-              <Card>
-                <CardContent>
-                  <Typography variant="subtitle1" sx={{ mb: 2 }}>大阪市</Typography>
-                  <Box sx={{display: 'flex', columnGap: '12px'}}>
-                    <Box
-                      component="img"
-                      src="/weather.svg"
-                      alt="Today's Weather"
-                      sx={{width: 64, height: 64, mr: 2}}
-                    >
-                    </Box>
-                    <Box sx={{display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-around'}}>
-                      <Typography variant="h2" color="red">28°C</Typography>
-                      <Typography variant="h3" color="secondary">18°C</Typography>
-                    </Box>
-                  </Box>
-
-                  <Box>
-                      <Box 
-                        sx= {{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          mb: 1,
-                          p: 1,
-                        }}
-                        >
-                      {weeklyForecast.map((day, index) => (
-                        <Box component="div" key={index} sx={{
-                          width: 'calc(100% / 6)',
-                          textAlign: 'center',
-                          marginBottom: '0px',
-                        }}>
-                          {/* 曜日 */}
-                          <Box>
-                            <Typography variant="overline">{day.day}</Typography>
-                          </Box>
-                          {/* 天気画像 */}
-                          <Box
-                            component="img"
-                            src={day.icon}
-                            alt={`${day.day} Weather`}
-                            sx={{ width: 24, height: 24 }}
-                          />
-                          {/* 気温 */}
-                          <Box>
-                            <Typography variant="overline">{day.maxTemp}</Typography>
-                          </Box>
-                          <Box>
-                            <Typography variant="overline" color="gray">{day.minTemp}</Typography>
-                          </Box>
-                        </Box>
-                      ))}
-                      </Box>
-                  </Box>
-                </CardContent>
-              </Card>
+              <WeatherCard />
             </Box>
-
           </Box>
 
         </Box>
