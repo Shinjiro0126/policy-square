@@ -1,5 +1,23 @@
 import { NextResponse } from "next/server";
 
+interface Day {
+  day: string;
+  icon: string;
+  maxTemp: number;
+  minTemp: number;
+}
+
+interface WeatherDaily {
+  dt: number;
+  temp: {
+    max: number;
+    min: number;
+  }
+  weather: {
+    icon: string;
+  }[];
+}
+
 const API_KEY = 'a47c413bc3642c61cb1ec42310e68327';
 const BASE_URL = 'https://api.openweathermap.org/data/3.0/onecall';
 
@@ -21,15 +39,8 @@ export async function GET(request: Request) {
 
     const weatherData = await weatherRes.json();
     console.log(weatherData);
-    // const currentWeather = {
-    //   temp: Math.round(weatherData.current.temp),
-    //   // maxTemp: Math.round(weatherData.current.main.temp_max),
-    //   // minTemp: Math.round(weatherData.current.main.temp_min),
-    //   weather: weatherData.current.weather[0].description,
-    //   icon: `https://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}.png`,
-    // };
 
-    const dailyForecast = weatherData.daily.slice(0, 8).map((day: any) => ({
+    const dailyForecast: Day[] = weatherData.daily.slice(0, 8).map((day: WeatherDaily) => ({
       day: new Date(day.dt * 1000).toLocaleDateString('ja-JP', {weekday: 'short'}),
       icon: `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`,
       maxTemp: Math.round(day.temp.max),

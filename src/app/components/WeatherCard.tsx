@@ -11,27 +11,11 @@ interface ForcecastDay {
 }
 
 export default function WeatherCard(){
-  // const [currentWeather, setCurrentWeather] = useState<any>(null);
   const [weeklyForecast, setWeeklyForecast] = useState<ForcecastDay[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [lat, setLat] = useState<number | null>(35.4122);
-  const [lon, setLon] = useState<number | null>(139.4130);
-
-  // useEffect(() => {
-  //   if(navigator.geolocation){
-  //     navigator.geolocation.getCurrentPosition((position) => {
-  //       setLat(position.coords.latitude);
-  //       setLon(position.coords.longitude);
-  //     },
-  //     (error) => {
-  //       setError('位置情報を取得できませんでした。');
-  //       console.error(error);
-  //     })
-  //   } else {
-  //     setError('このブラウザは位置情報に対応していません');
-  //   }
-  // }, []);
+  const lat = 35.4122;
+  const lon = 139.4130;
 
   useEffect(() => {
     if(lat && lon){
@@ -43,11 +27,15 @@ export default function WeatherCard(){
           }
           const data = await res.json();
 
-          // setCurrentWeather(data.current);
           setWeeklyForecast(data.daily);
-        } catch (error: any) {
-          console.error(error);
-          setError('天気データの取得に失敗しました。');
+        } catch (error: unknown) {
+          if(error instanceof Error){
+            console.error(error.message);
+            setError(error.message || '天気データの取得に失敗しました。');
+          } else {
+            console.error('Unknown error occurred');
+            setError('天気データの取得に失敗しました。');
+          }
         } finally {
           setLoading(false);
         }
