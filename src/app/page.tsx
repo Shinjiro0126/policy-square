@@ -17,6 +17,7 @@ import WeatherCard from "./components/WeatherCard";
 
 export default function LoginPage() {
   const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
     useEffect(() => {
       const fetchTrendNews = async () => {
@@ -29,6 +30,8 @@ export default function LoginPage() {
           setNews(data.articles);
         } catch (error) {
           console.error(error);
+        } finally{
+          setLoading(false);
         }
       }
       fetchTrendNews();
@@ -75,7 +78,7 @@ export default function LoginPage() {
             </Box>
 
             {/* ニュースカードリスト */}
-            <NewsCardList newsData={news} title="注目のニュース" />
+            <NewsCardList newsData={news} title="注目のニュース" loading={loading} />
           </Box>
             
             {/* 天気予報PC */}

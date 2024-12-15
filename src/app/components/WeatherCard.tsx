@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import {Box, Card, CardContent, Typography} from '@mui/material';
+import {Box, Card, CardContent, Typography, Skeleton} from '@mui/material';
 
 interface ForcecastDay {
   day: string;
@@ -53,7 +53,40 @@ export default function WeatherCard(){
         </Typography>
         <Card>
           <CardContent>
-          <Typography>Loading...</Typography>
+            <Typography variant="subtitle1" sx={{ mb: 2 }}>東京</Typography>
+            <Box sx={{ display: 'flex', columnGap: '12px' }}>
+              <Skeleton variant="rectangular" width={64} height={64} />
+              <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-around' }}>
+                <Skeleton variant="text" width={50} height={40} />
+                <Skeleton variant="text" width={50} height={40} />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                mb: 1,
+                p: 1,
+              }}
+            >
+              {Array.from({ length: 6 }).map((_, index) => (
+                <Box
+                  component="div"
+                  key={index}
+                  sx={{
+                    width: 'calc(100% / 6)',
+                    textAlign: 'center',
+                    marginBottom: '0px',
+                  }}
+                >
+                  <Skeleton variant="text" width={40} height={20} />
+                  <Skeleton variant="circular" width={24} height={24} />
+                  <Skeleton variant="text" width={30} height={20} />
+                  <Skeleton variant="text" width={30} height={20} />
+                </Box>
+              ))}
+            </Box>
           </CardContent>
         </Card>
       </>
@@ -93,10 +126,10 @@ export default function WeatherCard(){
             >
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-around' }}>
-              <Typography variant="h2" color="red">
+              <Typography variant="h2">
                 {weeklyForecast[0].maxTemp}
                 </Typography>
-              <Typography variant="h3" color="secondary">
+              <Typography variant="h3" color="gray">
                 {weeklyForecast[0].minTemp}
                 </Typography>
             </Box>
@@ -112,7 +145,7 @@ export default function WeatherCard(){
                 p: 1,
               }}
             >
-              {weeklyForecast.map((day, index) => (
+              {weeklyForecast.slice(1).map((day, index) => (
                 <Box component="div" key={index} sx={{
                   width: 'calc(100% / 6)',
                   textAlign: 'center',

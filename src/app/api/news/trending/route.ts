@@ -16,7 +16,7 @@ export async function GET(){
 
   try {
     const topics = ["politics", "economy", "business"];
-    const response = await fetch(`${BASE_URL}?lang=ja&topic=${topics.join(",")}&max=5&token=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}?lang=ja&topic=${topics.join(",")}&max=10&token=${API_KEY}`);
     if(!response.ok){
       throw new Error("ニュースデータの取得に失敗しました。");
     }
