@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   Box,
   CssBaseline,
@@ -13,48 +13,49 @@ import NewsCardList from "@/app/components/NewsCardList";
 import NewsRankingCard from "@/app/components/NewsRankingCard";
 
 export default function PoliticlaPage(){
+  const [loading, setLoading] = useState(true);
+  const [loadingRanking, setLoadingRanking] = useState(true);
+  const [news, setNews] = useState([]);
+  const [newsRanking, setNewsRanking] = useState([]);
 
-  // ダミーデータ
-  const dummyNews = [
-    {
-      title: "ニュース記事1",
-      summary: "これはニュース記事1の概要です。これはニュース記事1の概要です。",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      title: "ニュース記事2",
-      summary: "これはニュース記事2の概要です。",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      title: "ニュース記事3",
-      summary: "これはニュース記事3の概要です。",
-      image: "https://via.placeholder.com/120",
-    },
-    {
-      title: "ニュース記事4",
-      summary: "これはニュース記事4の概要です。",
-      image: "https://via.placeholder.com/120",
-    },
-  ];
+  useEffect(() => {
+    const fetchCategoryNews = async () => {
+      try {
+        const keyword = "経済,企業,市場動向,株式,金融,投資";
+        const res = await fetch(`/api/news/category?keywords=${keyword}`);
+        if(!res.ok){
+          throw new Error("ニュースデータの取得に失敗しました。");
+        }
+        const data = await res.json();
+        setNews(data.articles);
+      } catch (error) {
+        console.error(error);
+      } finally{
+        setLoading(false);
+      }
+    }
+    fetchCategoryNews();
+  }, []);
 
-  // ダミーデータ
-  const rankingData = [
-    {
-      id: 1,
-      title: '中国「対トランプ」で日本に接近 米中対立の拍車に備え',
-      date: '11/16（土）',
-      image: '/next.svg',
-      link: '/news/1',
-    },
-    {
-      id: 2,
-      title: '米国株が急落、FRBの利上げ観測で投資家警戒',
-      date: '11/15（金）',
-      image: '/next.svg',
-      link: '/news/2',
-    },
-  ];
+  useEffect(() => {
+    const fetchTrendNews = async () => {
+      try {
+        const topics = "business";
+        const max = 5
+        const res = await fetch(`/api/news/trending?topics=${topics}&max=${max}`);
+        if(!res.ok){
+          throw new Error("ランキングデータの取得に失敗しました。");
+        }
+        const data = await res.json();
+        setNewsRanking(data.articles);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoadingRanking(false);
+      }
+    }
+    fetchTrendNews();
+  },[]);
 
   return(
     <DashboardLayout>
@@ -66,7 +67,7 @@ export default function PoliticlaPage(){
           <Link underline="none" color="inherit">
             ニュース
           </Link>
-          <Link underline="hover" color="inherit" href="/news/political">
+          <Link underline="hover" color="inherit" href="/news/business">
             ビジネス
           </Link>
         </Breadcrumbs>
@@ -75,12 +76,12 @@ export default function PoliticlaPage(){
         <Box sx={{display: "flex", gap: 2}}>
           {/* ニュース */}
           <Box sx={{width: {xs: '100%', md: '60%'}}}>
-            <NewsCardList newsData={dummyNews} title="ビジネス" />
+            <NewsCardList newsData={news} title="ビジネス" loading={loading} />
           </Box>
 
           {/* アクセスランキング */}
           <Box sx={{width: {xs: '100%', md: '40%'}}}>
-            <NewsRankingCard rankingData={rankingData} />
+            <NewsRankingCard rankingData={newsRanking} loading={loadingRanking} />
           </Box>
         </Box>
 

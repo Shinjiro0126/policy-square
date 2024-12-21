@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Collapse } from "@mui/material";
@@ -44,6 +44,15 @@ interface SidebarProps {
 export default function Sidebar({ mobileOpen, onDrawerToggle }: SidebarProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState<string | null>(null);
+
+  useEffect(() => {
+    const activeParent = NAV_ITEMS.find((item) => 
+      item.children?.some((child) => child.href == pathname)
+    );
+    if(activeParent){
+      setOpen(activeParent.title);
+    }
+  }, [pathname]);
 
   const handleClick = (title: string) => {
     setOpen(open === title ? null : title);  // 展開/折りたたみ処理

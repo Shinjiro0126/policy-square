@@ -10,13 +10,20 @@ interface Article {
 }
 
 
-export async function GET(){
+export async function GET(request: Request){
   const API_KEY = "1fa8c0e93387410586d706a9f17e8419";
   const BASE_URL = "https://gnews.io/api/v4/top-headlines";
 
+  const {searchParams} = new URL(request.url);
+
+  //topicsを処理
+  const topicsParam = searchParams.get('topic');
+  const topics = topicsParam ? topicsParam.split(",") : ["politics", "economy", "business"];
+  const max = parseInt(searchParams.get('max') || "10", 10);
+
   try {
-    const topics = ["politics", "economy", "business"];
-    const response = await fetch(`${BASE_URL}?lang=ja&topic=${topics.join(",")}&max=10&token=${API_KEY}`);
+    // const topics = ["politics", "economy", "business"];
+    const response = await fetch(`${BASE_URL}?lang=ja&topic=${topics.join(",")}&max=${max}&token=${API_KEY}`);
     if(!response.ok){
       throw new Error("ニュースデータの取得に失敗しました。");
     }
