@@ -1,6 +1,3 @@
-import { ContentCopy } from "@mui/icons-material";
-import { ariaHidden } from "@mui/material/Modal/ModalManager";
-import { error } from "console";
 import { NextResponse } from "next/server";
 
 interface Article {
@@ -49,6 +46,7 @@ export async function GET(request: Request){
 
     return NextResponse.json({articles});
   } catch (error) {
+    console.error("Error fetching news data:", error);
     return NextResponse.json({error: "ニュースデータの取得に失敗しました。"}, {status: 500});
   }
 }

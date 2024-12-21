@@ -21,7 +21,6 @@ const getTimeAgo = (publishedAt: string): string => {
 
   const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
   const diffInHours = Math.floor(diffInMinutes / 60);
-  const diffInDays = Math.floor(diffInHours / 24);
 
   if (diffInMinutes < 60) {
     return `${diffInMinutes}分前`;
