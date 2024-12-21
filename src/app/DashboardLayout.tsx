@@ -30,7 +30,7 @@ export function DashboardLayout({children}: {children: React.ReactNode}){
     <Sidebar mobileOpen={mobileOpen} onDrawerToggle={handleDrawerToggle} />
     {/* メインコンテンツ */}
     <Box component="main" 
-          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - 240px)` }, marginTop: '64px' }}
+          sx={{ flexGrow: 1, p: {xs: 2, md: 3}, width: { sm: `calc(100% - 240px)` }, marginTop: '64px' }}
       >
       {children}
     </Box>

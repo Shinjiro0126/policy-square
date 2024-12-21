@@ -18,7 +18,7 @@ interface WeatherDaily {
   }[];
 }
 
-const API_KEY = 'a47c413bc3642c61cb1ec42310e68327';
+const API_KEY = process.env.OPENWEATHER_API_KEY;
 const BASE_URL = 'https://api.openweathermap.org/data/3.0/onecall';
 
 const DEFAULT_LAT = 35.4122;

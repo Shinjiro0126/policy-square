@@ -73,7 +73,7 @@ export default function PoliticlaPage(){
         </Breadcrumbs>
 
 
-        <Box sx={{display: "flex", gap: 2}}>
+        <Box sx={{display: "flex", gap: '48px 16px', flexWrap: {xs: 'wrap', md: 'nowrap'}}}>
           {/* ニュース */}
           <Box sx={{width: {xs: '100%', md: '60%'}}}>
             <NewsCardList newsData={news} title="政治・経済" loading={loading} />

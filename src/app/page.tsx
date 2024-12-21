@@ -50,7 +50,7 @@ export default function LoginPage() {
           </Breadcrumbs>
 
           {/* ニュース一覧と天気予報を横並びで配置 */}
-          <Box sx={{display: "flex", gap: 2}}>
+          <Box sx={{display: "flex", gap: '48px 16px', flexWrap: {xs: 'wrap', md: 'nowrap'}}}>
 
             {/* ニュース */}
             <Box sx={{width: {xs: '100%', md: '60%'}}}>
@@ -82,7 +82,7 @@ export default function LoginPage() {
           </Box>
             
             {/* 天気予報PC */}
-            <Box sx={{ width: '40%', display: {xs: 'none', md: 'block'} }}>
+            <Box sx={{ width: {xs: '100%', md: '40%'}}}>
               <WeatherCard />
             </Box>
           </Box>

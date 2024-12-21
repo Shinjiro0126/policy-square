@@ -11,7 +11,7 @@ interface Article {
 
 
 export async function GET(request: Request){
-  const API_KEY = "1fa8c0e93387410586d706a9f17e8419";
+  const API_KEY = process.env.GNEWS_API_KEY;
   const BASE_URL = "https://gnews.io/api/v4/top-headlines";
 
   const {searchParams} = new URL(request.url);
