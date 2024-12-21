@@ -117,6 +117,7 @@ export default function NewsRankingCard({rankingData, title = "アクセスラ�
                 </Box>
                 <Box
                   sx={{
+                    flexShrink: 0,
                     width: '88px',
                     height: '72px',
                   }}
