@@ -14,11 +14,13 @@
     "@emotion/styled": "^11.13.5",
     "@fontsource/comic-neue": "^5.1.0",
     "@fontsource/open-sans": "^5.1.0",
+    "@google/generative-ai": "^0.21.0",
     "@mui/icons-material": "^6.1.8",
     "@mui/material": "^6.1.8",
     "@prisma/client": "^5.22.0",
     "@toolpad/core": "^0.10.0",
     "@vercel/postgres": "^0.10.0",
+    "axios": "^1.7.9",
     "next": "15.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
