@@ -50,6 +50,8 @@ export default function NewsSummary(){
                 <Skeleton variant="text" height={30} sx={{ mb: 1 }} />
                 <Skeleton variant="text" height={30} sx={{ mb: 1 }} />
                 <Skeleton variant="text" height={30} sx={{ mb: 1 }} />
+                <Skeleton variant="text" height={30} sx={{ mb: 1 }} />
+                <Skeleton variant="text" height={30} sx={{ mb: 0 }} />
               </>
             ) : error ? (
               <Typography color="error">{error}</Typography>
