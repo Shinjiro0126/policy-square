@@ -1,0 +1,20 @@
+name: Call Vercel API Every Hour
+
+# 定期実行スケジュール
+on:
+  schedule:
+    - cron: '0 * * * *' # 毎時0分に実行 (UTC 時間)
+# 手動実行も可能にする
+  workflow_dispatch:
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      # APIを呼び出すステップ
+      - name: Call Business API Endpoint
+        run: curl -X GET https://your-vercel-app.vercel.app/api/news/business
+
+      - name: Call Politics API Endpoint
+        run: curl -X GET https://your-vercel-app.vercel.app/api/news/politics

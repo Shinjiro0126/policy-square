@@ -17,12 +17,18 @@ export async function GET(req: NextRequest){
       take: maxResults,
     });
 
-    const filteredNews = news.filter((item) => {
-      if (item.categoryTy !== null) {
-        return (item.categoryTy & categoryTy) > 0;
+    const filteredNews: typeof news = [];
+    let count = 0;
+
+    for (const item of news) {
+      if (item.categoryTy !== null && (item.categoryTy & categoryTy) > 0) {
+        filteredNews.push(item);
+        count++;
+        if (count >= maxResults){
+          break;
+        }
       }
-      return false;
-    });
+    }
 
     const newsData = filteredNews.map((item) => ({
       title: item.title,
