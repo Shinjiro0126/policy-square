@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest){
-  const { searchParams } = req.nextUrl; // req.nextUrlを使用
+  const { searchParams } = req.nextUrl;
   console.log(searchParams.get('categoryTy'));
   const categoryTy = parseInt(searchParams.get('categoryTy') || "1", 10);
   const maxResults = parseInt(searchParams.get('maxResults') || "25", 10);
@@ -14,7 +14,6 @@ export async function GET(req: NextRequest){
       orderBy: {
         publishedAt: "desc",
       },
-      take: maxResults,
     });
 
     const filteredNews: typeof news = [];

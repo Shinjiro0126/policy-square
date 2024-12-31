@@ -44,7 +44,6 @@ export default function PoliticlaPage(){
           throw new Error("ランキングデータの取得に失敗しました。");
         }
         const data = await res.json();
-        console.log(data);
         setNewsRanking(data);
       } catch (error) {
         console.error(error);
