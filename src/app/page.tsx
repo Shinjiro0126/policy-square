@@ -20,14 +20,16 @@ export default function LoginPage() {
     useEffect(() => {
       const fetchTrendNews = async () => {
         try {
-          const res = await fetch(`/api/news/trending`);
+          const res = await fetch(`/api/news?categoryTy=3`);
+
           if(!res.ok){
             throw new Error("ニュースデータの取得に失敗しました。");
           }
           const data = await res.json();
-          setNews(data.articles);
+          console.log(data);
+          setNews(data);
         } catch (error) {
-          console.error(error);
+          console.error("fetchTrendNewsのエラー:", error);
         } finally{
           setLoading(false);
         }

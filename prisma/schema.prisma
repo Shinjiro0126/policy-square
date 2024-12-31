@@ -72,7 +72,6 @@ model MPoliticalPartyTy {
 model TNews {
   newsId          Int       @id @default(autoincrement()) @map("News_Id")
   categoryTy      Int?      @map("CategoryTy")
-  author          String?   @map("Author")
   title           String?   @map("Title")
   description     String?   @map("Description")
   url             String?   @map("Url")

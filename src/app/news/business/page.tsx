@@ -21,13 +21,12 @@ export default function PoliticlaPage(){
   useEffect(() => {
     const fetchCategoryNews = async () => {
       try {
-        const keyword = "経済,企業,市場動向,株式,金融,投資";
-        const res = await fetch(`/api/news/category?keywords=${keyword}`);
+        const res = await fetch(`/api/news?categoryTy=2`);
         if(!res.ok){
           throw new Error("ニュースデータの取得に失敗しました。");
         }
         const data = await res.json();
-        setNews(data.articles);
+        setNews(data);
       } catch (error) {
         console.error(error);
       } finally{
@@ -40,14 +39,12 @@ export default function PoliticlaPage(){
   useEffect(() => {
     const fetchTrendNews = async () => {
       try {
-        const topics = "business";
-        const max = 5
-        const res = await fetch(`/api/news/trending?topics=${topics}&max=${max}`);
+        const res = await fetch(`/api/news?categoryTy=2&maxResults=5`);
         if(!res.ok){
           throw new Error("ランキングデータの取得に失敗しました。");
         }
         const data = await res.json();
-        setNewsRanking(data.articles);
+        setNewsRanking(data);
       } catch (error) {
         console.error(error);
       } finally {

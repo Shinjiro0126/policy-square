@@ -8,7 +8,7 @@ interface NewsItem {
   publishedAt: string;
 }
 
-interface AccessRankingProps{
+interface AccessRankingProps {
   rankingData: NewsItem[];
   title?: string;
   loading: boolean;
@@ -35,15 +35,16 @@ const getTimeAgo = (publishedAt: string): string => {
   }
 }
 
-export default function NewsRankingCard({rankingData, title = "アクセスランキング", loading}: AccessRankingProps){
-  return(
+export default function NewsRankingCard({ rankingData = [], title = "アクセスランキング", loading }: AccessRankingProps) {
+  return (
     <>
       <Typography variant="h4" sx={{ mb: 2 }}>
         {title}
       </Typography>
       <Card>
-        {loading
-          ? Array.from({ length: 5 }).map((_, index) => (
+        {loading ? (
+          // ローディング中のスケルトン表示
+          Array.from({ length: 5 }).map((_, index) => (
             <Box
               key={index}
               sx={{
@@ -52,7 +53,7 @@ export default function NewsRankingCard({rankingData, title = "アクセスラ�
                 alignItems: "center",
                 columnGap: "12px",
                 padding: "16px",
-                borderBottom: index != 4 ? "1px solid #ddd" : "none",
+                borderBottom: index !== 4 ? "1px solid #ddd" : "none",
               }}
             >
               <Box sx={{ display: "flex", columnGap: "12px", flexGrow: 1 }}>
@@ -65,16 +66,19 @@ export default function NewsRankingCard({rankingData, title = "アクセスラ�
               <Skeleton variant="rectangular" width={88} height={72} sx={{ flexShrink: 0 }} />
             </Box>
           ))
-          :
+        ) : rankingData?.length === 0 ? (
+          // ニュースが空の場合
+          <Typography sx={{ padding: "16px" }}>ニュースが見つかりませんでした。</Typography>
+        ) : (
+          // ニュースデータの表示
           rankingData.map((news, index) => (
             <CardActionArea
               key={index}
               component="a"
-              href={news.url}
+              href={`/news/detail?url=${encodeURIComponent(news.url)}`}
               target='_blank'
               rel="noopener"
               sx={{
-                color: 'primary.main',
                 textDecoration: 'none',
                 borderBottom: index !== rankingData.length - 1 ? '1px solid #ddd' : 'none', // 最後のボーダーを非表示
               }}
@@ -124,7 +128,7 @@ export default function NewsRankingCard({rankingData, title = "アクセスラ�
                 >
                   <Box
                     component="img"
-                    src={news.image}
+                    src={news.image || "/noimage.png"}
                     alt={news.title}
                     sx={{
                       height: '100%',
@@ -136,9 +140,8 @@ export default function NewsRankingCard({rankingData, title = "アクセスラ�
               </CardContent>
             </CardActionArea>
           ))
-        }
+        )}
       </Card>
-
     </>
   );
 }
