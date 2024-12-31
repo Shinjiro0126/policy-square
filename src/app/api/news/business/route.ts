@@ -79,6 +79,13 @@ export async function GET(){
     return NextResponse.json({ message: "News data processed successfully", newRecords: insertArticles.length });
   } catch (error) {
     console.log("エラーが発生しました。:", error);
+    return NextResponse.json(
+      {
+        message: "Error processing news data",
+        error: error instanceof Error ? error.message : String(error),
+      },
+      { status: 500 }
+    );
   }
 }
 
