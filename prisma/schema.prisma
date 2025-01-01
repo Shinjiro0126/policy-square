@@ -78,7 +78,7 @@ model TNews {
   urlToImage      String?   @map("UrlToImage")
   publishedAt     String?   @map("PublishedAt")
   content         String?   @map("Content")
-  pv          　　 Int       @default(0)
+  pv              Int       @map("PV") @default(0)
   createDate      DateTime? @map("CreateDate")
   updateDate      DateTime? @map("UpdateDate") 
 }
