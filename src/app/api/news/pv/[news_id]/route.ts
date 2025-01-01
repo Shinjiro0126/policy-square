@@ -3,8 +3,13 @@ import { NextResponse, NextRequest } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function PUT(req: NextRequest, { params }: { params: { news_id: string } }) {
-  const { news_id } = await params;
+export async function PUT(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+  const news_id = pathname.split('/').pop();
+
+  if (!news_id) {
+    return NextResponse.json({ error: "ニュースIDが提供されていません。" }, { status: 400 });
+  }
 
   try {
     const id = parseInt(news_id, 10);
