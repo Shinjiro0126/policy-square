@@ -66,6 +66,7 @@ export async function GET(){
           urlToImage: article.image_url,
           url: article.link,
           publishedAt: article.pubDate,
+          pv: 0,
           createDate: insertDate,
           updateDate: insertDate,
         })),

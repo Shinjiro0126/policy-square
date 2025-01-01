@@ -14,7 +14,7 @@ jobs:
     steps:
       # APIを呼び出すステップ
       - name: Call Business API Endpoint
-        run: curl -X GET https://your-vercel-app.vercel.app/api/news/business
+        run: curl -X GET https://policy-square.vercel.app/api/news/business
 
       - name: Call Politics API Endpoint
-        run: curl -X GET https://your-vercel-app.vercel.app/api/news/politics
+        run: curl -X GET https://policy-square.vercel.app/api/news/politics

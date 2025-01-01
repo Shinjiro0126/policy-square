@@ -1,11 +1,14 @@
 import React from 'react';
 import { Box, Typography, Card, CardActionArea, CardContent, Skeleton } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 interface NewsItem {
+  id: number;
   title: string;
   image: string;
   url: string;
   publishedAt: string;
+  pv: number;
 }
 
 interface AccessRankingProps {
@@ -34,6 +37,22 @@ const getTimeAgo = (publishedAt: string): string => {
     });
   }
 }
+
+const handleCardClick = async (newsId: number) => {
+  try {
+    const response = await fetch(`/api/news/pv/${newsId}`, {
+      method: "PUT",
+    });
+    
+    if (response.ok) {
+      console.log(`News ID ${newsId} PV incremented successfully.`);
+    } else {
+      console.error("Failed to update PV");
+    }
+  } catch (error) {
+    console.error("Error updating PV:", error);
+  }
+};
 
 export default function NewsRankingCard({ rankingData = [], title = "アクセスランキング", loading }: AccessRankingProps) {
   return (
@@ -82,6 +101,7 @@ export default function NewsRankingCard({ rankingData = [], title = "アクセ�
                 textDecoration: 'none',
                 borderBottom: index !== rankingData.length - 1 ? '1px solid #ddd' : 'none', // 最後のボーダーを非表示
               }}
+              onClick={() => handleCardClick(news.id)}
             >
               <CardContent
                 sx={{
@@ -114,9 +134,15 @@ export default function NewsRankingCard({ rankingData = [], title = "アクセ�
                     >
                       {news.title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      {getTimeAgo(news.publishedAt)}
-                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', columnGap: '12px' }}>
+                      <Typography variant="body2" color="textSecondary">
+                        {getTimeAgo(news.publishedAt)}
+                      </Typography>
+                      <Typography variant='caption' color="textSecondary" sx={{ display: 'flex', alignItems: 'center',}}>
+                        <VisibilityIcon sx={{ height: '12px' }} />
+                        {news.pv}
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
                 <Box

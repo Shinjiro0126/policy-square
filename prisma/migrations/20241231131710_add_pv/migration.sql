@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "TNews" ALTER COLUMN "PV" DROP DEFAULT;

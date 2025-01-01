@@ -6,8 +6,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import NaturePeopleIcon from "@mui/icons-material/NaturePeople";
-import BadgeIcon from '@mui/icons-material/Badge';
+// import NaturePeopleIcon from "@mui/icons-material/NaturePeople";
+// import BadgeIcon from '@mui/icons-material/Badge';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
@@ -32,8 +32,8 @@ const NAV_ITEMS = [
       },
     ],
   },
-  { title: "政策広場", href: "/square", icon: <NaturePeopleIcon /> },
-  { title: "プロフィール", href: "/profile", icon: <BadgeIcon /> },
+  // { title: "政策広場", href: "/square", icon: <NaturePeopleIcon /> },
+  // { title: "プロフィール", href: "/profile", icon: <BadgeIcon /> },
 ];
 
 interface SidebarProps {

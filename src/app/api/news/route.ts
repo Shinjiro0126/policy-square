@@ -8,12 +8,16 @@ export async function GET(req: NextRequest){
   console.log(searchParams.get('categoryTy'));
   const categoryTy = parseInt(searchParams.get('categoryTy') || "1", 10);
   const maxResults = parseInt(searchParams.get('maxResults') || "25", 10);
+  const desc = searchParams.get('desc');
+
+  const orderBy: { [key: string]: "asc" | "desc" }[] = 
+  desc === "pv"
+    ? [{ pv: "desc" }, { publishedAt: "desc" }]
+    : [{ publishedAt: "desc" }];
 
   try {
     const news = await prisma.tNews.findMany({
-      orderBy: {
-        publishedAt: "desc",
-      },
+      orderBy,
     });
 
     const filteredNews: typeof news = [];
@@ -30,10 +34,12 @@ export async function GET(req: NextRequest){
     }
 
     const newsData = filteredNews.map((item) => ({
+      id: item.newsId,
       title: item.title,
       image: item.urlToImage,
       url: item.url,
       publishedAt: item.publishedAt,
+      pv: item.pv,
     }));
 
     return NextResponse.json(newsData);

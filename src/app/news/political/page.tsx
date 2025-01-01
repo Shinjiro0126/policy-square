@@ -39,7 +39,7 @@ export default function PoliticlaPage(){
   useEffect(() => {
     const fetchTrendNews = async () => {
       try {
-        const res = await fetch(`/api/news?categoryTy=1&maxResults=5`);
+        const res = await fetch(`/api/news?categoryTy=1&maxResults=5&desc=pv`);
         if(!res.ok){
           throw new Error("ランキングデータの取得に失敗しました。");
         }
